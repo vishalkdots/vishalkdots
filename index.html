@@ -4,775 +4,870 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vishal Singh — Senior Full-Stack Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface2: #1a1a26;
-    --accent: #6ee7b7;
-    --accent2: #818cf8;
-    --accent3: #f472b6;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --border: rgba(255,255,255,0.07);
-    --glow: rgba(110,231,183,0.15);
-  }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── RESET ─────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:16px;line-height:1.6;
+  color:#1c1c1e;background:#f8f6f2;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
 
-  html { scroll-behavior: smooth; }
+/* ── NAV ───────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(248,246,242,0.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #e5e0d8;
+  padding:0 clamp(1.25rem,4vw,3rem);
+}
+.nav-in{
+  max-width:1160px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:62px;
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-weight:500;letter-spacing:-0.01em;
+}
+.nav-logo span{font-style:italic;color:#6b6b6b}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.82rem;font-weight:500;color:#777;letter-spacing:0.02em;transition:color .2s}
+.nav-links a:hover{color:#1c1c1e}
+.nav-cta{
+  font-size:0.8rem;font-weight:600;
+  background:#1c1c1e;color:#fff;
+  padding:.45rem 1.2rem;border-radius:100px;
+  transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:#3a3a3c;transform:translateY(-1px)}
 
-  body {
-    font-family: 'DM Mono', monospace;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* ── HERO ──────────────────────────────────── */
+.hero{
+  padding:clamp(3.5rem,7vw,6rem) clamp(1.25rem,4vw,3rem) clamp(3rem,5vw,4.5rem);
+  border-bottom:1px solid #e5e0d8;
+}
+.hero-in{
+  max-width:1160px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:start;
+}
+.pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.75rem;font-weight:600;letter-spacing:.04em;
+  color:#1a6b3c;background:#e8f5ee;border:1px solid #b7dfc8;
+  padding:.3rem .85rem;border-radius:100px;margin-bottom:1.6rem;
+}
+.pill-dot{width:7px;height:7px;background:#1a6b3c;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-  /* Custom Cursor */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(110,231,183,0.5);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.3s ease, width 0.3s, height 0.3s;
-    transform: translate(-50%, -50%);
-  }
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.6rem,5vw,4.4rem);
+  font-weight:500;line-height:1.08;letter-spacing:-0.03em;
+  color:#1c1c1e;margin-bottom:1.25rem;
+}
+h1 em{font-style:italic;color:#8a8a8e}
 
-  /* Nav */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.2rem 3rem;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.2rem;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
+.hero-desc{
+  font-size:1.05rem;font-weight:300;line-height:1.8;
+  color:#555;max-width:540px;margin-bottom:2.25rem;
+}
+.hero-desc strong{font-weight:600;color:#1c1c1e}
 
-  /* Hero */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 8rem 3rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-solid{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.88rem;font-weight:600;
+  background:#1c1c1e;color:#fff;
+  padding:.65rem 1.5rem;border-radius:8px;
+  transition:background .2s,transform .15s;
+}
+.btn-solid:hover{background:#333;transform:translateY(-2px)}
+.btn-line{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.88rem;font-weight:500;
+  background:transparent;color:#555;
+  border:1.5px solid #d6d0c8;
+  padding:.65rem 1.4rem;border-radius:8px;
+  transition:all .2s;
+}
+.btn-line:hover{border-color:#999;color:#1c1c1e}
 
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 60% at 70% 40%, rgba(110,231,183,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(129,140,248,0.06) 0%, transparent 70%);
-  }
+/* hero sidebar */
+.hero-side{
+  display:flex;flex-direction:column;gap:1px;
+  background:#e5e0d8;border:1px solid #e5e0d8;
+  border-radius:14px;overflow:hidden;min-width:220px;
+}
+.s-row{
+  background:#f8f6f2;padding:1.15rem 1.4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:background .15s;
+}
+.s-row:hover{background:#f1ede6}
+.s-lbl{font-size:.75rem;font-weight:500;color:#999;letter-spacing:.02em}
+.s-val{
+  font-family:'Playfair Display',serif;
+  font-size:1.7rem;font-weight:500;letter-spacing:-0.02em;color:#1c1c1e;
+  line-height:1;
+}
+.s-val small{font-family:'Plus Jakarta Sans',sans-serif;font-size:.75rem;font-weight:400;color:#aaa}
+.s-contact{background:#f1ede6;padding:1.15rem 1.4rem}
+.s-contact p{font-size:.72rem;font-weight:600;color:#aaa;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.55rem}
+.s-contact a{display:block;font-size:.82rem;font-weight:500;color:#1c1c1e;margin-bottom:.2rem;transition:color .2s}
+.s-contact a:hover{color:#1a6b3c}
 
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
+/* ── SECTION WRAPPER ───────────────────────── */
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+section{padding:clamp(3rem,6vw,5rem) 0;border-bottom:1px solid #e5e0d8}
+section:last-of-type{border-bottom:none}
 
-  .hero-content { position: relative; z-index: 2; }
+.sec-hd{
+  display:flex;align-items:baseline;gap:1rem;
+  padding-bottom:1.25rem;border-bottom:1px solid #e5e0d8;
+  margin-bottom:2.5rem;
+}
+.sec-ttl{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.6rem,3vw,2.1rem);
+  font-weight:500;letter-spacing:-0.02em;color:#1c1c1e;
+}
+.sec-sub{font-size:.8rem;font-weight:400;color:#aaa}
 
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--accent); background: rgba(110,231,183,0.08);
-    border: 1px solid rgba(110,231,183,0.2);
-    padding: 0.4rem 0.8rem; border-radius: 100px;
-    margin-bottom: 2rem;
-    animation: fadeUp 0.8s ease forwards;
-  }
-  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+/* ── WHAT I DO ─────────────────────────────── */
+.wid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.wid-card{
+  background:#fff;border:1px solid #e5e0d8;border-radius:12px;
+  padding:1.75rem;transition:border-color .2s,box-shadow .2s,transform .2s;
+}
+.wid-card:hover{border-color:#c8c2b8;box-shadow:0 6px 28px rgba(0,0,0,.07);transform:translateY(-3px)}
+.wid-icon{font-size:1.7rem;margin-bottom:.85rem;line-height:1}
+.wid-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.08rem;font-weight:500;letter-spacing:-0.01em;
+  color:#1c1c1e;margin-bottom:.5rem;
+}
+.wid-desc{font-size:.85rem;font-weight:300;color:#666;line-height:1.7}
+.wid-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+.wtag{
+  font-size:.7rem;font-weight:600;letter-spacing:.02em;
+  padding:.2rem .55rem;background:#f1ede6;color:#666;border-radius:4px;
+}
 
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(3rem, 5vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
-  h1 .line1 { display: block; color: var(--text); }
-  h1 .line2 { display: block; color: var(--accent); }
+/* ── PROJECTS ──────────────────────────────── */
+.proj-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;
+}
+.proj-card{
+  background:#fff;border:1px solid #e5e0d8;border-radius:14px;
+  overflow:hidden;transition:border-color .25s,box-shadow .25s,transform .25s;
+  display:flex;flex-direction:column;
+}
+.proj-card:hover{
+  border-color:#b8b2a8;
+  box-shadow:0 10px 40px rgba(0,0,0,.09);
+  transform:translateY(-4px);
+}
 
-  .hero-sub {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-size: 1.3rem;
-    color: var(--muted);
-    margin: 1.5rem 0;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
+/* project header bar */
+.proj-header{
+  padding:1.5rem 1.75rem 0;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+}
+.proj-num{
+  font-size:.7rem;font-weight:600;color:#ccc;
+  letter-spacing:.1em;margin-bottom:.35rem;
+}
+.proj-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:500;letter-spacing:-0.015em;
+  color:#1c1c1e;line-height:1.2;margin-bottom:.3rem;
+}
+.proj-role{
+  display:inline-block;font-size:.68rem;font-weight:600;
+  color:#1a6b3c;background:#e8f5ee;border:1px solid #b7dfc8;
+  padding:.15rem .55rem;border-radius:4px;letter-spacing:.02em;
+}
+.proj-live-btn{
+  display:inline-flex;align-items:center;gap:.35rem;flex-shrink:0;
+  font-size:.72rem;font-weight:600;letter-spacing:.03em;
+  color:#1c1c1e;background:#f1ede6;border:1px solid #e5e0d8;
+  padding:.4rem .85rem;border-radius:6px;
+  transition:all .2s;white-space:nowrap;margin-top:.15rem;
+}
+.proj-live-btn:hover{background:#1c1c1e;color:#fff;border-color:#1c1c1e}
+.proj-live-dot{width:6px;height:6px;background:#1a6b3c;border-radius:50%;flex-shrink:0}
 
-  .hero-desc {
-    font-size: 0.82rem;
-    line-height: 1.8;
-    color: var(--muted);
-    max-width: 480px;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
+/* project body */
+.proj-body{padding:.9rem 1.75rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:.75rem}
+.proj-desc{font-size:.85rem;font-weight:300;color:#666;line-height:1.7}
+.proj-bullets{list-style:none;display:flex;flex-direction:column;gap:.2rem}
+.proj-bullets li{
+  font-size:.8rem;font-weight:400;color:#888;line-height:1.5;
+  padding-left:1rem;position:relative;
+}
+.proj-bullets li::before{content:'·';position:absolute;left:0;color:#bbb;font-size:1.3rem;top:-0.15rem}
 
-  .hero-cta {
-    display: flex; gap: 1rem; margin-top: 2.5rem;
-    animation: fadeUp 0.8s 0.4s ease both;
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    background: var(--accent);
-    color: #000;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.82rem;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-  .btn-primary:hover { background: #a7f3d0; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(110,231,183,0.3); }
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.82rem;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+/* project footer */
+.proj-footer{
+  border-top:1px solid #f0ece6;
+  padding:.9rem 1.75rem;
+  display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;
+  background:#faf8f5;
+}
+.ptag{
+  font-size:.68rem;font-weight:500;
+  padding:.22rem .55rem;
+  background:#fff;border:1px solid #e5e0d8;
+  color:#666;border-radius:5px;white-space:nowrap;
+}
 
-  /* Stats */
-  .hero-stats {
-    position: relative; z-index: 2;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: flex-end;
-    gap: 1.5rem;
-    animation: fadeIn 1s 0.5s ease both;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem 2rem;
-    min-width: 220px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s;
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .stat-card:hover { transform: translateX(-6px); border-color: rgba(110,231,183,0.3); }
-  .stat-card:hover::before { opacity: 1; }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .stat-num span { font-size: 1.2rem; }
-  .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.05em; }
+/* ── SKILLS ────────────────────────────────── */
+.skill-table{
+  width:100%;border-collapse:collapse;
+  border:1px solid #e5e0d8;border-radius:12px;overflow:hidden;
+  background:#fff;
+}
+.skill-table tr{border-bottom:1px solid #f0ece6;transition:background .15s}
+.skill-table tr:last-child{border-bottom:none}
+.skill-table tr:hover td{background:#faf8f5}
+.skill-table td{padding:1.1rem 1.5rem;vertical-align:middle}
+.skill-table td:first-child{
+  width:160px;font-size:.72rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:#aaa;border-right:1px solid #f0ece6;white-space:nowrap;
+}
+.s-pills{display:flex;flex-wrap:wrap;gap:.4rem}
+.sp{
+  font-size:.8rem;font-weight:400;
+  padding:.28rem .7rem;background:#f5f2ee;
+  color:#444;border-radius:6px;transition:background .15s;
+}
+.sp:hover{background:#e8e3db}
 
-  .status-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.72rem; color: var(--accent);
-    margin-top: 1rem;
-  }
-  .status-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+/* ── EXPERIENCE ────────────────────────────── */
+.exp-row{
+  display:grid;grid-template-columns:180px 1fr;gap:3rem;
+  padding:2.25rem 0;border-bottom:1px solid #f0ece6;
+}
+.exp-row:last-child{border-bottom:none}
+.exp-date{font-size:.8rem;font-weight:400;color:#aaa;line-height:1.5;padding-top:.2rem}
+.exp-badge{
+  display:inline-block;margin-top:.4rem;
+  font-size:.68rem;font-weight:600;background:#e8f5ee;
+  color:#1a6b3c;border:1px solid #b7dfc8;
+  padding:.15rem .5rem;border-radius:4px;
+}
+.exp-co{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:500;letter-spacing:-0.02em;margin-bottom:.2rem;
+}
+.exp-role-txt{font-size:.82rem;font-weight:400;color:#999;margin-bottom:1.1rem}
+.exp-lis{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.exp-lis li{
+  font-size:.88rem;font-weight:300;color:#555;line-height:1.65;
+  padding-left:1.1rem;position:relative;
+}
+.exp-lis li::before{content:'—';position:absolute;left:0;color:#ccc;font-size:.75rem;top:.28rem}
 
-  /* Sections common */
-  section { padding: 6rem 3rem; position: relative; }
-  .section-label {
-    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 0.5rem;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 3vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 3rem;
-    line-height: 1.1;
-  }
-  .section-title em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--accent2); }
+/* ── CONTACT ───────────────────────────────── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-hl{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.7rem,3vw,2.2rem);font-weight:500;
+  letter-spacing:-0.02em;line-height:1.2;margin-bottom:1rem;
+}
+.contact-hl em{font-style:italic;color:#aaa}
+.contact-sub{font-size:.9rem;font-weight:300;color:#666;line-height:1.75;margin-bottom:2rem}
+.cdet{display:flex;flex-direction:column;gap:.9rem}
+.c-item{display:flex;align-items:center;gap:.85rem}
+.c-ico{
+  width:38px;height:38px;background:#f1ede6;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;flex-shrink:0;
+}
+.c-lbl{font-size:.7rem;font-weight:600;color:#bbb;letter-spacing:.06em;text-transform:uppercase;display:block}
+.c-val{font-size:.88rem;font-weight:500;color:#1c1c1e}
+.cf{display:flex;flex-direction:column;gap:.9rem}
+.cf label{font-size:.78rem;font-weight:600;color:#888;display:block;margin-bottom:.35rem}
+.cf input,.cf textarea{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  width:100%;font-size:.88rem;font-weight:300;
+  padding:.72rem 1rem;background:#fff;
+  border:1.5px solid #e5e0d8;border-radius:8px;
+  color:#1c1c1e;outline:none;resize:none;
+  transition:border-color .2s;
+}
+.cf input:focus,.cf textarea:focus{border-color:#999}
 
-  /* Skills */
-  .skills-section { background: var(--surface); }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-  .skill-group {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.8rem;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .skill-group:hover { border-color: rgba(129,140,248,0.4); transform: translateY(-4px); }
-  .skill-group-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .skill-group-title::before { content: '//'; color: var(--muted); }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .skill-tag {
-    font-size: 0.72rem;
-    padding: 0.3rem 0.7rem;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text);
-    transition: all 0.2s;
-  }
-  .skill-tag:hover { background: rgba(129,140,248,0.1); border-color: var(--accent2); color: var(--accent2); }
+/* ── FOOTER ────────────────────────────────── */
+footer{
+  background:#fff;border-top:1px solid #e5e0d8;
+  padding:1.5rem clamp(1.25rem,4vw,3rem);
+}
+.foot-in{
+  max-width:1160px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.foot-l{font-size:.78rem;color:#aaa}
+.foot-r{font-size:.78rem;color:#aaa}
+.foot-r span{color:#888;font-weight:500}
 
-  /* Projects */
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; }
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
-  }
-  .project-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 80% at 50% 50%, var(--card-glow, rgba(110,231,183,0.04)) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .project-card:hover { transform: translateY(-6px); border-color: rgba(110,231,183,0.25); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-  .project-card:hover::after { opacity: 1; }
+/* ── FADE-IN ────────────────────────────────── */
+.fi{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.fi.in{opacity:1;transform:translateY(0)}
 
-  .project-role {
-    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--accent3); margin-bottom: 0.75rem;
-  }
-  .project-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.25rem; font-weight: 700;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
-  }
-  .project-desc {
-    font-size: 0.78rem;
-    line-height: 1.75;
-    color: var(--muted);
-    margin-bottom: 1.2rem;
-  }
-  .project-apis { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .api-tag {
-    font-size: 0.65rem;
-    padding: 0.25rem 0.6rem;
-    background: rgba(244,114,182,0.08);
-    border: 1px solid rgba(244,114,182,0.2);
-    color: var(--accent3);
-    border-radius: 100px;
-  }
+/* ── RESPONSIVE ────────────────────────────── */
+@media(max-width:960px){
+  .hero-in{grid-template-columns:1fr}
+  .hero-side{flex-direction:row;flex-wrap:wrap;background:none;gap:.75rem;border:none;border-radius:0}
+  .s-row{border:1px solid #e5e0d8;border-radius:10px;flex:1;min-width:120px}
+  .s-contact{border:1px solid #e5e0d8;border-radius:10px;flex:100%}
+  .wid-grid{grid-template-columns:1fr 1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  .exp-row{grid-template-columns:1fr;gap:.75rem}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .wid-grid{grid-template-columns:1fr}
+  .skill-table td:first-child{display:none}
+  .proj-header{flex-direction:column;gap:.5rem}
+}
 
-  /* Timeline / Experience */
-  .experience-section { background: var(--surface); }
-  .exp-item {
-    display: grid; grid-template-columns: 200px 1fr;
-    gap: 3rem; padding: 2.5rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .exp-item:last-child { border-bottom: none; }
-  .exp-date { font-size: 0.75rem; color: var(--muted); padding-top: 0.25rem; }
-  .exp-company {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em;
-  }
-  .exp-role {
-    font-size: 0.78rem; color: var(--accent2);
-    letter-spacing: 0.05em; margin: 0.25rem 0 1rem;
-  }
-  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .exp-points li {
-    font-size: 0.8rem; color: var(--muted); line-height: 1.6;
-    padding-left: 1.2rem; position: relative;
-  }
-  .exp-points li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
-
-  /* APIs section */
-  .apis-section { overflow: hidden; }
-  .api-marquee-wrapper { position: relative; margin: 2rem 0; }
-  .api-marquee-wrapper::before,
-  .api-marquee-wrapper::after {
-    content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2;
-  }
-  .api-marquee-wrapper::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
-  .api-marquee-wrapper::after { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
-  .api-marquee { display: flex; gap: 1rem; animation: marquee 25s linear infinite; width: max-content; }
-  .api-marquee.reverse { animation: marquee-reverse 30s linear infinite; }
-  .api-item {
-    white-space: nowrap;
-    padding: 0.6rem 1.2rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 0.78rem;
-    color: var(--text);
-    flex-shrink: 0;
-  }
-
-  /* Contact */
-  .contact-section {
-    text-align: center;
-    background: var(--surface);
-  }
-  .contact-card {
-    max-width: 600px; margin: 0 auto;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .contact-card::before {
-    content: '';
-    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 60%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  }
-  .contact-info { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
-  .contact-row {
-    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
-    font-size: 0.85rem;
-  }
-  .contact-row .icon { color: var(--accent); }
-
-  /* Footer */
-  footer {
-    padding: 2rem 3rem;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.72rem; color: var(--muted);
-  }
-
-  /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(110,231,183,0.4); }
-    50% { box-shadow: 0 0 0 6px rgba(110,231,183,0); }
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @keyframes marquee-reverse {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
-  }
-
-  /* Scroll reveal */
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
-    .hero-stats { align-items: flex-start; flex-direction: row; flex-wrap: wrap; margin-top: 3rem; }
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    section { padding: 4rem 1.5rem; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-  }
-  @media (max-width: 600px) {
-    .nav-links { display: none; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr; }
-  }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">VS /</div>
-  <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#apis">Integrations</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-in">
+    <div class="nav-logo">Vishal Singh <span>/ Dev</span></div>
+    <ul class="nav-links">
+      <li><a href="#whatido">What I Do</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:vishalkdots@gmail.com" class="nav-cta">Hire Me</a>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
 
-  <div class="hero-content">
-    <div class="hero-tag">Available for opportunities</div>
-    <h1>
-      <span class="line1">Vishal</span>
-      <span class="line2">Singh</span>
-    </h1>
-    <p class="hero-sub">Senior Full-Stack Developer</p>
-    <p class="hero-desc">
-      6+ years building high-traffic travel booking platforms with ASP.NET Core, React.js, and Node.js.
-      Specialized in GDS & NDC API integrations — from Amadeus to Sabre.
-      Delivered 8+ live platforms as Tech Lead with 15+ third-party integrations.
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn-primary">View Projects ↓</a>
-      <a href="#contact" class="btn-outline">Get in Touch</a>
-    </div>
-  </div>
+<!-- ═══ HERO ═════════════════════════════════ -->
+<section style="border-bottom:1px solid #e5e0d8;padding:0">
+<div style="max-width:1160px;margin:0 auto;padding:clamp(3.5rem,7vw,6rem) clamp(1.25rem,4vw,3rem) clamp(3rem,5vw,4.5rem)">
+  <div class="hero-in">
 
-  <div class="hero-stats">
-    <div class="stat-card">
-      <div class="stat-num">6<span>+</span></div>
-      <div class="stat-label">Years of Experience</div>
+    <div>
+      <div class="pill"><span class="pill-dot"></span>Open to new opportunities</div>
+      <h1>I build travel<br><em>booking platforms</em><br>the world uses.</h1>
+      <p class="hero-desc">
+        Senior Full-Stack Developer with <strong>6+ years</strong> of experience.<br>
+        I've shipped <strong>10 live platforms</strong> as Tech Lead — flight search,
+        hotel booking, package deals, B2B agency portals — powered by
+        <strong>Amadeus, Sabre, Galileo</strong> and 12+ other travel APIs.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-solid">See Live Projects ↓</a>
+        <a href="mailto:vishalkdots@gmail.com" class="btn-line">Get in Touch</a>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-num">8<span>+</span></div>
-      <div class="stat-label">Live Platforms as Tech Lead</div>
+
+    <div class="hero-side">
+      <div class="s-row">
+        <span class="s-lbl">Experience</span>
+        <span class="s-val">6+ <small>yrs</small></span>
+      </div>
+      <div class="s-row">
+        <span class="s-lbl">Live Platforms</span>
+        <span class="s-val">10+</span>
+      </div>
+      <div class="s-row">
+        <span class="s-lbl">APIs Integrated</span>
+        <span class="s-val">15+</span>
+      </div>
+      <div class="s-row">
+        <span class="s-lbl">Location</span>
+        <div style="text-align:right;font-size:.82rem;font-weight:500;color:#1c1c1e;line-height:1.3">Jaipur, India<br><span style="font-size:.72rem;color:#aaa;font-weight:400">Open to Remote</span></div>
+      </div>
+      <div class="s-contact">
+        <p>Contact</p>
+        <a href="mailto:vishalkdots@gmail.com">vishalkdots@gmail.com</a>
+        <a href="tel:+919351488682">+91 93514 88682</a>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-num">15<span>+</span></div>
-      <div class="stat-label">Third-Party API Integrations</div>
-    </div>
-    <div class="status-badge">
-      <span class="status-dot"></span>
-      Based in Jaipur, India · Open to Remote
-    </div>
+
   </div>
+</div>
 </section>
 
-<!-- SKILLS -->
-<section class="skills-section" id="skills">
-  <div class="section-label">What I Know</div>
-  <div class="section-title">Technical <em>Skills</em></div>
-  <div class="skills-grid">
-    <div class="skill-group reveal">
-      <div class="skill-group-title">.NET & Backend</div>
-      <div class="skill-tags">
-        <span class="skill-tag">C#</span>
-        <span class="skill-tag">ASP.NET Core</span>
-        <span class="skill-tag">ASP.NET MVC</span>
-        <span class="skill-tag">Entity Framework</span>
-        <span class="skill-tag">LINQ</span>
-        <span class="skill-tag">RESTful APIs</span>
-        <span class="skill-tag">Microservices</span>
-        <span class="skill-tag">Node.js</span>
-      </div>
+
+<!-- ═══ WHAT I DO ════════════════════════════ -->
+<section id="whatido">
+<div class="wrap">
+  <div class="sec-hd fi">
+    <h2 class="sec-ttl">What I Do</h2>
+    <span class="sec-sub">My core expertise</span>
+  </div>
+  <div class="wid-grid">
+    <div class="wid-card fi">
+      <div class="wid-icon">✈️</div>
+      <div class="wid-name">Travel Platform Dev</div>
+      <div class="wid-desc">End-to-end flight, hotel and package booking systems for agencies (B2B) and travellers (B2C) — from search to payment confirmation.</div>
+      <div class="wid-tags"><span class="wtag">GDS</span><span class="wtag">NDC</span><span class="wtag">PNR</span><span class="wtag">Ticketing</span></div>
     </div>
-    <div class="skill-group reveal">
-      <div class="skill-group-title">Frontend</div>
-      <div class="skill-tags">
-        <span class="skill-tag">React.js</span>
-        <span class="skill-tag">React Native</span>
-        <span class="skill-tag">Angular</span>
-        <span class="skill-tag">TypeScript</span>
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">HTML5</span>
-        <span class="skill-tag">CSS3 / SCSS</span>
-        <span class="skill-tag">jQuery</span>
-      </div>
+    <div class="wid-card fi">
+      <div class="wid-icon">🔗</div>
+      <div class="wid-name">API Integration</div>
+      <div class="wid-desc">I connect Amadeus, Sabre, Galileo and 12+ other travel APIs into unified booking flows — multi-supplier aggregation, real-time pricing, fare management.</div>
+      <div class="wid-tags"><span class="wtag">Amadeus</span><span class="wtag">Sabre</span><span class="wtag">Galileo</span><span class="wtag">Duffel</span></div>
     </div>
-    <div class="skill-group reveal">
-      <div class="skill-group-title">Database</div>
-      <div class="skill-tags">
-        <span class="skill-tag">MS SQL Server</span>
-        <span class="skill-tag">MySQL</span>
-        <span class="skill-tag">MongoDB</span>
-        <span class="skill-tag">AJAX / JSON / XML</span>
-      </div>
-    </div>
-    <div class="skill-group reveal">
-      <div class="skill-group-title">Payment Gateways</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Stripe</span>
-        <span class="skill-tag">PayPal</span>
-        <span class="skill-tag">Razorpay</span>
-        <span class="skill-tag">Square</span>
-        <span class="skill-tag">PayU</span>
-        <span class="skill-tag">Klarna</span>
-        <span class="skill-tag">Moyasar</span>
-        <span class="skill-tag">Paystack</span>
-      </div>
+    <div class="wid-card fi">
+      <div class="wid-icon">🏗️</div>
+      <div class="wid-name">Full-Stack Architecture</div>
+      <div class="wid-desc">Scalable backends with ASP.NET Core and Node.js paired with fast React frontends. Microservices, REST APIs, SQL and NoSQL databases.</div>
+      <div class="wid-tags"><span class="wtag">ASP.NET Core</span><span class="wtag">React</span><span class="wtag">Node.js</span><span class="wtag">Microservices</span></div>
     </div>
   </div>
+</div>
 </section>
 
-<!-- PROJECTS -->
+
+<!-- ═══ PROJECTS ══════════════════════════════ -->
 <section id="projects">
-  <div class="section-label">What I've Built</div>
-  <div class="section-title">Key <em>Projects</em></div>
-  <div class="projects-grid">
+<div class="wrap">
+  <div class="sec-hd fi">
+    <h2 class="sec-ttl">Live Projects</h2>
+    <span class="sec-sub">10 platforms shipped — click to visit</span>
+  </div>
+  <div class="proj-grid">
 
-    <div class="project-card reveal" style="--card-glow: rgba(110,231,183,0.06)">
-      <div class="project-role">Tech Lead · Sr. Full-Stack</div>
-      <div class="project-name">GDSPNR — Travel Booking Platform</div>
-      <div class="project-desc">Subscription-based B2B/B2C platform for travel agencies with flight, hotel, tour, and package booking modules. Built scalable REST APIs and dynamic membership system.</div>
-      <div class="project-apis">
-        <span class="api-tag">Sabre</span><span class="api-tag">Amadeus</span><span class="api-tag">Galileo</span>
-        <span class="api-tag">Mystifly</span><span class="api-tag">HotelBeds</span><span class="api-tag">Stripe</span>
-        <span class="api-tag">Klarna</span>
+    <!-- 1 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">01 — LIVE</div>
+          <div class="proj-name">GDSPNR</div>
+          <div class="proj-role">Tech Lead · Senior Full-Stack</div>
+        </div>
+        <a href="https://www.gdspnr.com" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Subscription-based travel booking platform for agencies and business clients. Agents subscribe, log in and book flights, hotels, tours and packages through one dashboard.</p>
+        <ul class="proj-bullets">
+          <li>Flight, hotel, tour & package booking modules</li>
+          <li>Dynamic membership & subscription management</li>
+          <li>Multi-gateway: Stripe, PayPal, Klarna, Paystack</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">Sabre</span><span class="ptag">Amadeus</span>
+        <span class="ptag">Galileo</span><span class="ptag">Mystifly</span>
+        <span class="ptag">HotelBeds</span><span class="ptag">Travellanda</span>
+        <span class="ptag">Stripe</span><span class="ptag">Klarna</span>
       </div>
     </div>
 
-    <div class="project-card reveal" style="--card-glow: rgba(129,140,248,0.06)">
-      <div class="project-role">Tech Lead · Sr. ASP.NET Developer</div>
-      <div class="project-name">KabulTrip — Multi-Supplier Flight System</div>
-      <div class="project-desc">Multi-supplier flight aggregation platform with unified search combining multiple GDS responses. Built custom flight creation and supplier combination tools from admin panel.</div>
-      <div class="project-apis">
-        <span class="api-tag">BiletBank</span><span class="api-tag">OneAPI</span><span class="api-tag">PKFare</span>
+    <!-- 2 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">02 — LIVE</div>
+          <div class="proj-name">KabulTrip</div>
+          <div class="proj-role">Tech Lead · Senior ASP.NET</div>
+        </div>
+        <a href="https://kabultrip.com/" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Multi-supplier flight aggregation platform that pulls results from multiple GDS providers and shows them in one unified search — with admin tools to create and combine flights.</p>
+        <ul class="proj-bullets">
+          <li>Unified search combining multiple supplier feeds</li>
+          <li>Custom flight creation from admin panel</li>
+          <li>Supplier combination management tools</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">BiletBank</span><span class="ptag">OneAPI</span><span class="ptag">PKFare</span>
+        <span class="ptag">ASP.NET Core</span><span class="ptag">React</span>
       </div>
     </div>
 
-    <div class="project-card reveal" style="--card-glow: rgba(244,114,182,0.06)">
-      <div class="project-role">Tech Lead · Full-Stack Developer</div>
-      <div class="project-name">SastiFlight — Hold Booking B2C</div>
-      <div class="project-desc">B2C hold flight booking system with fully dynamic admin management. Implemented booking workflow, fare management, and optimized reservation performance.</div>
-      <div class="project-apis">
-        <span class="api-tag">Galileo GDS</span><span class="api-tag">Emirates NDC</span>
+    <!-- 3 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">03 — LIVE</div>
+          <div class="proj-name">SastiFlight</div>
+          <div class="proj-role">Tech Lead · Full-Stack</div>
+        </div>
+        <a href="https://www.sastiflight.com/" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">B2C hold-booking platform. Travellers can lock in a flight fare and pay later — reducing abandonment. Supports Galileo GDS and Emirates NDC direct connect.</p>
+        <ul class="proj-bullets">
+          <li>Hold booking workflow with time-limited fare lock</li>
+          <li>Emirates NDC direct connection</li>
+          <li>Dynamic admin panel for booking management</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">Galileo GDS</span><span class="ptag">Emirates NDC</span>
+        <span class="ptag">ASP.NET Core</span><span class="ptag">React</span>
       </div>
     </div>
 
-    <div class="project-card reveal" style="--card-glow: rgba(110,231,183,0.06)">
-      <div class="project-role">Tech Lead · Sr. Full-Stack (React | Node.js)</div>
-      <div class="project-name">The Center Tours — Package Booking</div>
-      <div class="project-desc">Complete travel package platform covering flights, hotels, tours, and adventure activities. Scalable backend APIs with a responsive frontend booking experience.</div>
-      <div class="project-apis">
-        <span class="api-tag">Sabre</span><span class="api-tag">HotelBeds</span><span class="api-tag">Viator</span>
+    <!-- 4 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">04 — LIVE</div>
+          <div class="proj-name">The Center Tours</div>
+          <div class="proj-role">Tech Lead · React & Node.js</div>
+        </div>
+        <a href="https://www.thecentertours.com/" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Complete travel package platform — flights, hotels, guided tours and adventure activities all in one place. Customers can build a full trip from search to checkout.</p>
+        <ul class="proj-bullets">
+          <li>Viator API for tours & adventure activities</li>
+          <li>Combined flight + hotel booking flow</li>
+          <li>Responsive, mobile-first frontend</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">Sabre</span><span class="ptag">HotelBeds</span>
+        <span class="ptag">Viator</span><span class="ptag">Node.js</span><span class="ptag">React</span>
       </div>
     </div>
 
-    <div class="project-card reveal" style="--card-glow: rgba(129,140,248,0.06)">
-      <div class="project-role">Tech Lead · Full-Stack Developer</div>
-      <div class="project-name">GetFlyDeal — Multilingual Booking</div>
-      <div class="project-desc">Bilingual flight booking platform supporting English and Arabic. Built multilingual UI, dynamic booking workflows, and optimized payment processing.</div>
-      <div class="project-apis">
-        <span class="api-tag">Mystifly</span><span class="api-tag">Moyasar</span><span class="api-tag">Stripe</span>
+    <!-- 5 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">05 — LIVE</div>
+          <div class="proj-name">GetFlyDeal</div>
+          <div class="proj-role">Tech Lead · Full-Stack</div>
+        </div>
+        <a href="https://getflydeal.com" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Bilingual flight booking platform supporting English and Arabic with RTL layout. Built for the Middle East market with local payment support via Moyasar.</p>
+        <ul class="proj-bullets">
+          <li>Full Arabic & English UI with RTL support</li>
+          <li>Moyasar gateway for Saudi Arabia market</li>
+          <li>Optimised for mobile booking flows</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">Mystifly</span><span class="ptag">Moyasar</span><span class="ptag">Stripe</span>
+        <span class="ptag">ASP.NET Core</span><span class="ptag">React</span>
       </div>
     </div>
 
-    <div class="project-card reveal" style="--card-glow: rgba(244,114,182,0.06)">
-      <div class="project-role">Tech Lead · Sr. Full-Stack (React | Node.js)</div>
-      <div class="project-name">The FareX — B2B Flight Portal</div>
-      <div class="project-desc">Advanced B2B agency management portal with ticketing, PNR retrieval, split PNR, seat selection, baggage management, and multi-PCC code management.</div>
-      <div class="project-apis">
-        <span class="api-tag">Amadeus WSDL</span><span class="api-tag">Sabre</span><span class="api-tag">Jazeera Airways</span><span class="api-tag">OneAPI</span>
+    <!-- 6 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">06 — LIVE</div>
+          <div class="proj-name">ASAP Fly</div>
+          <div class="proj-role">Full-Stack Developer</div>
+        </div>
+        <a href="https://asapfly.com/" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Real-time flight reservation platform powered by Amadeus. Fast search, responsive UI, and scalable backend booking services built with React and Node.js.</p>
+        <ul class="proj-bullets">
+          <li>Real-time Amadeus API integration</li>
+          <li>Scalable backend booking microservices</li>
+          <li>Optimised API response times</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">Amadeus</span><span class="ptag">React</span>
+        <span class="ptag">Node.js</span><span class="ptag">REST API</span>
       </div>
     </div>
 
-    <div class="project-card reveal" style="--card-glow: rgba(110,231,183,0.06)">
-      <div class="project-role">Tech Lead · Sr. Full-Stack (React | Node.js)</div>
-      <div class="project-name">Havo24 — Russian Flight Platform</div>
-      <div class="project-desc">Russia-based booking platform for agencies and customers. Integrated multiple Russian suppliers. Optimized for high-volume flight search with supplier-wise booking management.</div>
-      <div class="project-apis">
-        <span class="api-tag">Avtra</span><span class="api-tag">Sirena</span><span class="api-tag">Mixvel</span><span class="api-tag">SIG</span><span class="api-tag">Ural</span>
+    <!-- 7 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">07 — LIVE</div>
+          <div class="proj-name">The FareX</div>
+          <div class="proj-role">Tech Lead · Senior Full-Stack</div>
+        </div>
+        <a href="https://thefarex.com/" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Advanced B2B flight portal for travel agencies — full ticketing, PNR retrieval, split PNR, seat selection, baggage management and multi-PCC code handling.</p>
+        <ul class="proj-bullets">
+          <li>Ticketing, PNR split, seat & baggage management</li>
+          <li>Multi-PCC code management for multiple GDS offices</li>
+          <li>Agent booking & ticket management dashboards</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">Amadeus WSDL</span><span class="ptag">Sabre</span>
+        <span class="ptag">Jazeera Airways</span><span class="ptag">OneAPI</span>
       </div>
     </div>
 
-    <div class="project-card reveal" style="--card-glow: rgba(129,140,248,0.06)">
-      <div class="project-role">Full-Stack Developer</div>
-      <div class="project-name">ASAP Fly — Real-Time Reservations</div>
-      <div class="project-desc">Real-time flight reservation platform with scalable backend booking services and responsive frontend modules. Optimized for fast API responses.</div>
-      <div class="project-apis">
-        <span class="api-tag">Amadeus Flight API</span>
+    <!-- 8 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">08 — LIVE</div>
+          <div class="proj-name">Havo24</div>
+          <div class="proj-role">Tech Lead · React & Node.js</div>
+        </div>
+        <a href="https://havo24.ru/" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Russia-based flight booking platform for agencies and customers. Aggregates 5 Russian suppliers into one unified search with high-volume performance optimisation.</p>
+        <ul class="proj-bullets">
+          <li>5 Russian flight suppliers in one search</li>
+          <li>Supplier-wise booking & API management</li>
+          <li>Optimised for high-volume concurrent searches</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">Avtra</span><span class="ptag">Sirena</span>
+        <span class="ptag">Mixvel</span><span class="ptag">SIG</span><span class="ptag">Ural</span>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">09 — LIVE</div>
+          <div class="proj-name">B2B Viva Booking</div>
+          <div class="proj-role">Senior Full-Stack Developer</div>
+        </div>
+        <a href="https://b2bvivabooking.com/" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">B2B travel booking portal for agency networks. Agents can search, book and manage flights and hotels under their own branded portal with commission tracking.</p>
+        <ul class="proj-bullets">
+          <li>B2B agency management and white-label support</li>
+          <li>Commission and markup management per agent</li>
+          <li>Integrated flight and hotel booking modules</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">ASP.NET Core</span><span class="ptag">React</span>
+        <span class="ptag">GDS APIs</span><span class="ptag">SQL Server</span>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="proj-card fi">
+      <div class="proj-header">
+        <div>
+          <div class="proj-num">10 — LIVE</div>
+          <div class="proj-name">UK Travel B2B</div>
+          <div class="proj-role">Senior Full-Stack Developer</div>
+        </div>
+        <a href="https://www.uktravelb2b.com/" target="_blank" class="proj-live-btn">
+          <span class="proj-live-dot"></span> Visit Site ↗
+        </a>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">UK-focused B2B travel platform for agents and tour operators. Complete booking management with UK market compliance, GBP currency support and UK-based suppliers.</p>
+        <ul class="proj-bullets">
+          <li>UK market-specific pricing and compliance</li>
+          <li>B2B agent panel with role-based access</li>
+          <li>Flight and hotel booking with GBP support</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="ptag">ASP.NET Core</span><span class="ptag">React</span>
+        <span class="ptag">Travelport</span><span class="ptag">HotelBeds</span>
       </div>
     </div>
 
   </div>
+</div>
 </section>
 
-<!-- EXPERIENCE -->
-<section class="experience-section" id="experience">
-  <div class="section-label">Where I've Worked</div>
-  <div class="section-title">Work <em>Experience</em></div>
-  <div class="exp-item reveal">
+
+<!-- ═══ SKILLS ════════════════════════════════ -->
+<section id="skills">
+<div class="wrap">
+  <div class="sec-hd fi">
+    <h2 class="sec-ttl">Skills & Stack</h2>
+    <span class="sec-sub">Everything I work with</span>
+  </div>
+  <table class="skill-table fi">
+    <tr>
+      <td>Backend</td>
+      <td><div class="s-pills">
+        <span class="sp">C#</span><span class="sp">ASP.NET Core</span><span class="sp">ASP.NET MVC</span>
+        <span class="sp">Node.js</span><span class="sp">Entity Framework</span><span class="sp">LINQ</span>
+        <span class="sp">REST APIs</span><span class="sp">Microservices</span>
+      </div></td>
+    </tr>
+    <tr>
+      <td>Frontend</td>
+      <td><div class="s-pills">
+        <span class="sp">React.js</span><span class="sp">React Native</span><span class="sp">Angular</span>
+        <span class="sp">TypeScript</span><span class="sp">JavaScript</span>
+        <span class="sp">HTML5</span><span class="sp">CSS3 / SCSS</span><span class="sp">jQuery</span>
+      </div></td>
+    </tr>
+    <tr>
+      <td>Flight APIs</td>
+      <td><div class="s-pills">
+        <span class="sp">Amadeus</span><span class="sp">Sabre</span><span class="sp">Galileo</span>
+        <span class="sp">Travelport</span><span class="sp">Mystifly</span><span class="sp">Duffel</span>
+        <span class="sp">TripJack</span><span class="sp">Kiwi</span><span class="sp">Emirates NDC</span>
+        <span class="sp">Sirena / Mixvel</span>
+      </div></td>
+    </tr>
+    <tr>
+      <td>Hotel APIs</td>
+      <td><div class="s-pills">
+        <span class="sp">HotelBeds</span><span class="sp">Travellanda</span>
+        <span class="sp">RateHawk</span><span class="sp">Stuba</span><span class="sp">Travel Boutique</span>
+      </div></td>
+    </tr>
+    <tr>
+      <td>Payments</td>
+      <td><div class="s-pills">
+        <span class="sp">Stripe</span><span class="sp">PayPal</span><span class="sp">Razorpay</span>
+        <span class="sp">Square</span><span class="sp">PayU</span><span class="sp">Klarna</span>
+        <span class="sp">Moyasar</span><span class="sp">Paystack</span>
+      </div></td>
+    </tr>
+    <tr>
+      <td>Database</td>
+      <td><div class="s-pills">
+        <span class="sp">MS SQL Server</span><span class="sp">MySQL</span><span class="sp">MongoDB</span>
+      </div></td>
+    </tr>
+  </table>
+</div>
+</section>
+
+
+<!-- ═══ EXPERIENCE ════════════════════════════ -->
+<section id="experience">
+<div class="wrap">
+  <div class="sec-hd fi">
+    <h2 class="sec-ttl">Experience</h2>
+  </div>
+  <div class="exp-row fi">
     <div>
-      <div class="exp-date">Aug 2020 — Present</div>
+      <div class="exp-date">Aug 2020<br>— Present</div>
+      <div class="exp-badge">Current Role</div>
     </div>
     <div>
-      <div class="exp-company">Team India Web Design</div>
-      <div class="exp-role">Senior Full-Stack Developer · Jaipur, India</div>
-      <ul class="exp-points">
-        <li>Built scalable enterprise applications using ASP.NET Core, React.js, and Node.js</li>
-        <li>Created RESTful APIs and microservices for web and mobile platforms</li>
-        <li>Integrated 15+ third-party APIs including travel GDS, NDC, hotel, and payment systems</li>
-        <li>Led development of 8+ live platforms as Tech Lead</li>
-        <li>Optimized backend performance and managed SQL Server and MongoDB databases</li>
-        <li>Participated in code reviews and mentored junior developers</li>
+      <div class="exp-co">Team India Web Design</div>
+      <div class="exp-role-txt">Senior Full-Stack Developer · Jaipur, India</div>
+      <ul class="exp-lis">
+        <li>Shipped 10+ live travel booking platforms as Tech Lead — from first commit to production</li>
+        <li>Integrated 15+ third-party APIs across GDS flight systems, hotel providers and payment gateways</li>
+        <li>Built scalable microservices and REST APIs with ASP.NET Core and Node.js</li>
+        <li>Delivered React frontends handling high-volume concurrent bookings</li>
+        <li>Managed full project lifecycle: architecture, development, code review, deployment</li>
+        <li>Mentored junior developers and led technical decision-making for the team</li>
       </ul>
     </div>
   </div>
+</div>
 </section>
 
-<!-- APIs MARQUEE -->
-<section class="apis-section" id="apis">
-  <div class="section-label">GDS & Third-Party</div>
-  <div class="section-title">API <em>Integrations</em></div>
-  <div class="api-marquee-wrapper">
-    <div class="api-marquee">
-      <div class="api-item">✈ Amadeus</div><div class="api-item">✈ Sabre</div>
-      <div class="api-item">✈ Galileo</div><div class="api-item">✈ Travelport</div>
-      <div class="api-item">✈ Mystifly</div><div class="api-item">✈ Duffel</div>
-      <div class="api-item">✈ Skyscanner</div><div class="api-item">✈ TripJack</div>
-      <div class="api-item">✈ Kiwi</div><div class="api-item">✈ Emirates NDC</div>
-      <div class="api-item">✈ Sirena</div><div class="api-item">✈ Mixvel</div>
-      <!-- Duplicate for seamless loop -->
-      <div class="api-item">✈ Amadeus</div><div class="api-item">✈ Sabre</div>
-      <div class="api-item">✈ Galileo</div><div class="api-item">✈ Travelport</div>
-      <div class="api-item">✈ Mystifly</div><div class="api-item">✈ Duffel</div>
-      <div class="api-item">✈ Skyscanner</div><div class="api-item">✈ TripJack</div>
-      <div class="api-item">✈ Kiwi</div><div class="api-item">✈ Emirates NDC</div>
-      <div class="api-item">✈ Sirena</div><div class="api-item">✈ Mixvel</div>
+
+<!-- ═══ CONTACT ═══════════════════════════════ -->
+<section id="contact">
+<div class="wrap">
+  <div class="sec-hd fi">
+    <h2 class="sec-ttl">Get in Touch</h2>
+  </div>
+  <div class="contact-grid fi">
+    <div>
+      <p class="contact-hl">Have a project<br>in mind? <em>Let's talk.</em></p>
+      <p class="contact-sub">I'm open to full-time roles, contract work and freelance projects — especially in travel tech. Whether you need a senior developer or a tech lead, feel free to reach out.</p>
+      <div class="cdet">
+        <div class="c-item">
+          <div class="c-ico">✉️</div>
+          <div>
+            <span class="c-lbl">Email</span>
+            <a href="mailto:vishalkdots@gmail.com" class="c-val" style="display:block;transition:color .2s" onmouseover="this.style.color='#1a6b3c'" onmouseout="this.style.color='#1c1c1e'">vishalkdots@gmail.com</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico">📞</div>
+          <div>
+            <span class="c-lbl">Phone</span>
+            <span class="c-val">+91 93514 88682</span>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico">📍</div>
+          <div>
+            <span class="c-lbl">Location</span>
+            <span class="c-val">Jaipur, Rajasthan · Remote OK</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="cf">
+        <div><label>Your Name</label><input type="text" placeholder="e.g. Rahul Sharma"></div>
+        <div><label>Email Address</label><input type="email" placeholder="rahul@company.com"></div>
+        <div><label>Message</label><textarea rows="5" placeholder="Tell me about your project..."></textarea></div>
+        <a href="mailto:vishalkdots@gmail.com" class="btn-solid" style="width:fit-content">Send Message →</a>
+      </div>
     </div>
   </div>
-  <div class="api-marquee-wrapper">
-    <div class="api-marquee reverse">
-      <div class="api-item">🏨 HotelBeds</div><div class="api-item">🏨 Travellanda</div>
-      <div class="api-item">🏨 RateHawk</div><div class="api-item">🏨 Stuba</div>
-      <div class="api-item">💳 Stripe</div><div class="api-item">💳 PayPal</div>
-      <div class="api-item">💳 Razorpay</div><div class="api-item">💳 Klarna</div>
-      <div class="api-item">💳 Moyasar</div><div class="api-item">💳 Paystack</div>
-      <div class="api-item">🗺 Viator</div><div class="api-item">✈ OneAPI</div>
-      <div class="api-item">🏨 HotelBeds</div><div class="api-item">🏨 Travellanda</div>
-      <div class="api-item">🏨 RateHawk</div><div class="api-item">🏨 Stuba</div>
-      <div class="api-item">💳 Stripe</div><div class="api-item">💳 PayPal</div>
-      <div class="api-item">💳 Razorpay</div><div class="api-item">💳 Klarna</div>
-      <div class="api-item">💳 Moyasar</div><div class="api-item">💳 Paystack</div>
-      <div class="api-item">🗺 Viator</div><div class="api-item">✈ OneAPI</div>
-    </div>
-  </div>
+</div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="section-label">Let's Work Together</div>
-  <div class="section-title">Get in <em>Touch</em></div>
-  <div class="contact-card reveal">
-    <p style="font-size:0.85rem; color:var(--muted); line-height:1.8;">
-      I'm open to full-time roles, freelance projects, and exciting travel tech opportunities.
-      Whether you need a senior developer or a tech lead — let's talk!
-    </p>
-    <div class="contact-info">
-      <div class="contact-row">
-        <span class="icon">✉</span>
-        <a href="mailto:vishalkdots@gmail.com" style="color:var(--text); text-decoration:none;">vishalkdots@gmail.com</a>
-      </div>
-      <div class="contact-row">
-        <span class="icon">📞</span>
-        <span>+91 93514 88682</span>
-      </div>
-      <div class="contact-row">
-        <span class="icon">📍</span>
-        <span>Jaipur, Rajasthan · Open to Remote</span>
-      </div>
-    </div>
-    <a href="mailto:vishalkdots@gmail.com" class="btn-primary" style="display:inline-flex; margin-top:1rem;">
-      Say Hello →
-    </a>
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer>
-  <span>© 2026 Vishal Singh. Built with precision.</span>
-  <span style="color:var(--accent);">ASP.NET Core · React · Node.js · GDS APIs</span>
+  <div class="foot-in">
+    <span class="foot-l">© 2026 Vishal Singh · Jaipur, India</span>
+    <span class="foot-r">Built with <span>ASP.NET Core · React · Node.js</span></span>
+  </div>
 </footer>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  function animCursor() {
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animCursor);
-  }
-  animCursor();
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.width = '56px'; ring.style.height = '56px'; });
-    el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; });
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 70);
+      obs.unobserve(e.target);
+    }
   });
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => obs.observe(r));
+}, { threshold: 0.07 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
