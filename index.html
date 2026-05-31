@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishal Singh — Senior Full-Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --accent: #6ee7b7;
+    --accent2: #818cf8;
+    --accent3: #f472b6;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --border: rgba(255,255,255,0.07);
+    --glow: rgba(110,231,183,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(110,231,183,0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.3s ease, width 0.3s, height 0.3s;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 40%, rgba(110,231,183,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(129,140,248,0.06) 0%, transparent 70%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); background: rgba(110,231,183,0.08);
+    border: 1px solid rgba(110,231,183,0.2);
+    padding: 0.4rem 0.8rem; border-radius: 100px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  h1 .line1 { display: block; color: var(--text); }
+  h1 .line2 { display: block; color: var(--accent); }
+
+  .hero-sub {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--muted);
+    margin: 1.5rem 0;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-desc {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 480px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background: var(--accent);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #a7f3d0; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(110,231,183,0.3); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Stats */
+  .hero-stats {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-end;
+    gap: 1.5rem;
+    animation: fadeIn 1s 0.5s ease both;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    min-width: 220px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .stat-card:hover { transform: translateX(-6px); border-color: rgba(110,231,183,0.3); }
+  .stat-card:hover::before { opacity: 1; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-num span { font-size: 1.2rem; }
+  .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.05em; }
+
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; color: var(--accent);
+    margin-top: 1rem;
+  }
+  .status-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+
+  /* Sections common */
+  section { padding: 6rem 3rem; position: relative; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+  .section-title em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--accent2); }
+
+  /* Skills */
+  .skills-section { background: var(--surface); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-group {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .skill-group:hover { border-color: rgba(129,140,248,0.4); transform: translateY(-4px); }
+  .skill-group-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .skill-group-title::before { content: '//'; color: var(--muted); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+  .skill-tag:hover { background: rgba(129,140,248,0.1); border-color: var(--accent2); color: var(--accent2); }
+
+  /* Projects */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
+  }
+  .project-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, var(--card-glow, rgba(110,231,183,0.04)) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .project-card:hover { transform: translateY(-6px); border-color: rgba(110,231,183,0.25); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .project-card:hover::after { opacity: 1; }
+
+  .project-role {
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent3); margin-bottom: 0.75rem;
+  }
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .project-desc {
+    font-size: 0.78rem;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+  .project-apis { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .api-tag {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(244,114,182,0.08);
+    border: 1px solid rgba(244,114,182,0.2);
+    color: var(--accent3);
+    border-radius: 100px;
+  }
+
+  /* Timeline / Experience */
+  .experience-section { background: var(--surface); }
+  .exp-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 3rem; padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-date { font-size: 0.75rem; color: var(--muted); padding-top: 0.25rem; }
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em;
+  }
+  .exp-role {
+    font-size: 0.78rem; color: var(--accent2);
+    letter-spacing: 0.05em; margin: 0.25rem 0 1rem;
+  }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-points li {
+    font-size: 0.8rem; color: var(--muted); line-height: 1.6;
+    padding-left: 1.2rem; position: relative;
+  }
+  .exp-points li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+  /* APIs section */
+  .apis-section { overflow: hidden; }
+  .api-marquee-wrapper { position: relative; margin: 2rem 0; }
+  .api-marquee-wrapper::before,
+  .api-marquee-wrapper::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2;
+  }
+  .api-marquee-wrapper::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+  .api-marquee-wrapper::after { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
+  .api-marquee { display: flex; gap: 1rem; animation: marquee 25s linear infinite; width: max-content; }
+  .api-marquee.reverse { animation: marquee-reverse 30s linear infinite; }
+  .api-item {
+    white-space: nowrap;
+    padding: 0.6rem 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+
+  /* Contact */
+  .contact-section {
+    text-align: center;
+    background: var(--surface);
+  }
+  .contact-card {
+    max-width: 600px; margin: 0 auto;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-card::before {
+    content: '';
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 60%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
+  .contact-row {
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    font-size: 0.85rem;
+  }
+  .contact-row .icon { color: var(--accent); }
+
+  /* Footer */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem; color: var(--muted);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(110,231,183,0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(110,231,183,0); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes marquee-reverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-stats { align-items: flex-start; flex-direction: row; flex-wrap: wrap; margin-top: 3rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VS /</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#apis">Integrations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1>
+      <span class="line1">Vishal</span>
+      <span class="line2">Singh</span>
+    </h1>
+    <p class="hero-sub">Senior Full-Stack Developer</p>
+    <p class="hero-desc">
+      6+ years building high-traffic travel booking platforms with ASP.NET Core, React.js, and Node.js.
+      Specialized in GDS & NDC API integrations — from Amadeus to Sabre.
+      Delivered 8+ live platforms as Tech Lead with 15+ third-party integrations.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-num">6<span>+</span></div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8<span>+</span></div>
+      <div class="stat-label">Live Platforms as Tech Lead</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">15<span>+</span></div>
+      <div class="stat-label">Third-Party API Integrations</div>
+    </div>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      Based in Jaipur, India · Open to Remote
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-label">What I Know</div>
+  <div class="section-title">Technical <em>Skills</em></div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">.NET & Backend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag">ASP.NET Core</span>
+        <span class="skill-tag">ASP.NET MVC</span>
+        <span class="skill-tag">Entity Framework</span>
+        <span class="skill-tag">LINQ</span>
+        <span class="skill-tag">RESTful APIs</span>
+        <span class="skill-tag">Microservices</span>
+        <span class="skill-tag">Node.js</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">React Native</span>
+        <span class="skill-tag">Angular</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3 / SCSS</span>
+        <span class="skill-tag">jQuery</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Database</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MS SQL Server</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">AJAX / JSON / XML</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Payment Gateways</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Stripe</span>
+        <span class="skill-tag">PayPal</span>
+        <span class="skill-tag">Razorpay</span>
+        <span class="skill-tag">Square</span>
+        <span class="skill-tag">PayU</span>
+        <span class="skill-tag">Klarna</span>
+        <span class="skill-tag">Moyasar</span>
+        <span class="skill-tag">Paystack</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've Built</div>
+  <div class="section-title">Key <em>Projects</em></div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal" style="--card-glow: rgba(110,231,183,0.06)">
+      <div class="project-role">Tech Lead · Sr. Full-Stack</div>
+      <div class="project-name">GDSPNR — Travel Booking Platform</div>
+      <div class="project-desc">Subscription-based B2B/B2C platform for travel agencies with flight, hotel, tour, and package booking modules. Built scalable REST APIs and dynamic membership system.</div>
+      <div class="project-apis">
+        <span class="api-tag">Sabre</span><span class="api-tag">Amadeus</span><span class="api-tag">Galileo</span>
+        <span class="api-tag">Mystifly</span><span class="api-tag">HotelBeds</span><span class="api-tag">Stripe</span>
+        <span class="api-tag">Klarna</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--card-glow: rgba(129,140,248,0.06)">
+      <div class="project-role">Tech Lead · Sr. ASP.NET Developer</div>
+      <div class="project-name">KabulTrip — Multi-Supplier Flight System</div>
+      <div class="project-desc">Multi-supplier flight aggregation platform with unified search combining multiple GDS responses. Built custom flight creation and supplier combination tools from admin panel.</div>
+      <div class="project-apis">
+        <span class="api-tag">BiletBank</span><span class="api-tag">OneAPI</span><span class="api-tag">PKFare</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--card-glow: rgba(244,114,182,0.06)">
+      <div class="project-role">Tech Lead · Full-Stack Developer</div>
+      <div class="project-name">SastiFlight — Hold Booking B2C</div>
+      <div class="project-desc">B2C hold flight booking system with fully dynamic admin management. Implemented booking workflow, fare management, and optimized reservation performance.</div>
+      <div class="project-apis">
+        <span class="api-tag">Galileo GDS</span><span class="api-tag">Emirates NDC</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--card-glow: rgba(110,231,183,0.06)">
+      <div class="project-role">Tech Lead · Sr. Full-Stack (React | Node.js)</div>
+      <div class="project-name">The Center Tours — Package Booking</div>
+      <div class="project-desc">Complete travel package platform covering flights, hotels, tours, and adventure activities. Scalable backend APIs with a responsive frontend booking experience.</div>
+      <div class="project-apis">
+        <span class="api-tag">Sabre</span><span class="api-tag">HotelBeds</span><span class="api-tag">Viator</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--card-glow: rgba(129,140,248,0.06)">
+      <div class="project-role">Tech Lead · Full-Stack Developer</div>
+      <div class="project-name">GetFlyDeal — Multilingual Booking</div>
+      <div class="project-desc">Bilingual flight booking platform supporting English and Arabic. Built multilingual UI, dynamic booking workflows, and optimized payment processing.</div>
+      <div class="project-apis">
+        <span class="api-tag">Mystifly</span><span class="api-tag">Moyasar</span><span class="api-tag">Stripe</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--card-glow: rgba(244,114,182,0.06)">
+      <div class="project-role">Tech Lead · Sr. Full-Stack (React | Node.js)</div>
+      <div class="project-name">The FareX — B2B Flight Portal</div>
+      <div class="project-desc">Advanced B2B agency management portal with ticketing, PNR retrieval, split PNR, seat selection, baggage management, and multi-PCC code management.</div>
+      <div class="project-apis">
+        <span class="api-tag">Amadeus WSDL</span><span class="api-tag">Sabre</span><span class="api-tag">Jazeera Airways</span><span class="api-tag">OneAPI</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--card-glow: rgba(110,231,183,0.06)">
+      <div class="project-role">Tech Lead · Sr. Full-Stack (React | Node.js)</div>
+      <div class="project-name">Havo24 — Russian Flight Platform</div>
+      <div class="project-desc">Russia-based booking platform for agencies and customers. Integrated multiple Russian suppliers. Optimized for high-volume flight search with supplier-wise booking management.</div>
+      <div class="project-apis">
+        <span class="api-tag">Avtra</span><span class="api-tag">Sirena</span><span class="api-tag">Mixvel</span><span class="api-tag">SIG</span><span class="api-tag">Ural</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--card-glow: rgba(129,140,248,0.06)">
+      <div class="project-role">Full-Stack Developer</div>
+      <div class="project-name">ASAP Fly — Real-Time Reservations</div>
+      <div class="project-desc">Real-time flight reservation platform with scalable backend booking services and responsive frontend modules. Optimized for fast API responses.</div>
+      <div class="project-apis">
+        <span class="api-tag">Amadeus Flight API</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience-section" id="experience">
+  <div class="section-label">Where I've Worked</div>
+  <div class="section-title">Work <em>Experience</em></div>
+  <div class="exp-item reveal">
+    <div>
+      <div class="exp-date">Aug 2020 — Present</div>
+    </div>
+    <div>
+      <div class="exp-company">Team India Web Design</div>
+      <div class="exp-role">Senior Full-Stack Developer · Jaipur, India</div>
+      <ul class="exp-points">
+        <li>Built scalable enterprise applications using ASP.NET Core, React.js, and Node.js</li>
+        <li>Created RESTful APIs and microservices for web and mobile platforms</li>
+        <li>Integrated 15+ third-party APIs including travel GDS, NDC, hotel, and payment systems</li>
+        <li>Led development of 8+ live platforms as Tech Lead</li>
+        <li>Optimized backend performance and managed SQL Server and MongoDB databases</li>
+        <li>Participated in code reviews and mentored junior developers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- APIs MARQUEE -->
+<section class="apis-section" id="apis">
+  <div class="section-label">GDS & Third-Party</div>
+  <div class="section-title">API <em>Integrations</em></div>
+  <div class="api-marquee-wrapper">
+    <div class="api-marquee">
+      <div class="api-item">✈ Amadeus</div><div class="api-item">✈ Sabre</div>
+      <div class="api-item">✈ Galileo</div><div class="api-item">✈ Travelport</div>
+      <div class="api-item">✈ Mystifly</div><div class="api-item">✈ Duffel</div>
+      <div class="api-item">✈ Skyscanner</div><div class="api-item">✈ TripJack</div>
+      <div class="api-item">✈ Kiwi</div><div class="api-item">✈ Emirates NDC</div>
+      <div class="api-item">✈ Sirena</div><div class="api-item">✈ Mixvel</div>
+      <!-- Duplicate for seamless loop -->
+      <div class="api-item">✈ Amadeus</div><div class="api-item">✈ Sabre</div>
+      <div class="api-item">✈ Galileo</div><div class="api-item">✈ Travelport</div>
+      <div class="api-item">✈ Mystifly</div><div class="api-item">✈ Duffel</div>
+      <div class="api-item">✈ Skyscanner</div><div class="api-item">✈ TripJack</div>
+      <div class="api-item">✈ Kiwi</div><div class="api-item">✈ Emirates NDC</div>
+      <div class="api-item">✈ Sirena</div><div class="api-item">✈ Mixvel</div>
+    </div>
+  </div>
+  <div class="api-marquee-wrapper">
+    <div class="api-marquee reverse">
+      <div class="api-item">🏨 HotelBeds</div><div class="api-item">🏨 Travellanda</div>
+      <div class="api-item">🏨 RateHawk</div><div class="api-item">🏨 Stuba</div>
+      <div class="api-item">💳 Stripe</div><div class="api-item">💳 PayPal</div>
+      <div class="api-item">💳 Razorpay</div><div class="api-item">💳 Klarna</div>
+      <div class="api-item">💳 Moyasar</div><div class="api-item">💳 Paystack</div>
+      <div class="api-item">🗺 Viator</div><div class="api-item">✈ OneAPI</div>
+      <div class="api-item">🏨 HotelBeds</div><div class="api-item">🏨 Travellanda</div>
+      <div class="api-item">🏨 RateHawk</div><div class="api-item">🏨 Stuba</div>
+      <div class="api-item">💳 Stripe</div><div class="api-item">💳 PayPal</div>
+      <div class="api-item">💳 Razorpay</div><div class="api-item">💳 Klarna</div>
+      <div class="api-item">💳 Moyasar</div><div class="api-item">💳 Paystack</div>
+      <div class="api-item">🗺 Viator</div><div class="api-item">✈ OneAPI</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label">Let's Work Together</div>
+  <div class="section-title">Get in <em>Touch</em></div>
+  <div class="contact-card reveal">
+    <p style="font-size:0.85rem; color:var(--muted); line-height:1.8;">
+      I'm open to full-time roles, freelance projects, and exciting travel tech opportunities.
+      Whether you need a senior developer or a tech lead — let's talk!
+    </p>
+    <div class="contact-info">
+      <div class="contact-row">
+        <span class="icon">✉</span>
+        <a href="mailto:vishalkdots@gmail.com" style="color:var(--text); text-decoration:none;">vishalkdots@gmail.com</a>
+      </div>
+      <div class="contact-row">
+        <span class="icon">📞</span>
+        <span>+91 93514 88682</span>
+      </div>
+      <div class="contact-row">
+        <span class="icon">📍</span>
+        <span>Jaipur, Rajasthan · Open to Remote</span>
+      </div>
+    </div>
+    <a href="mailto:vishalkdots@gmail.com" class="btn-primary" style="display:inline-flex; margin-top:1rem;">
+      Say Hello →
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Vishal Singh. Built with precision.</span>
+  <span style="color:var(--accent);">ASP.NET Core · React · Node.js · GDS APIs</span>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width = '56px'; ring.style.height = '56px'; });
+    el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
